@@ -181,6 +181,9 @@ begin
   else if(ATypeName = 'DOUBLE')or(ATypeName = 'FLOAT')or(ATypeName = 'DECIMAL')or(ATypeName = 'NUMERIC')then
     Result := C_DOUBLE
   else
+  if(ATypeName = 'DOUBLE PRECISION')or(ATypeName = 'FLOAT')or(ATypeName = 'DECIMAL')or(ATypeName = 'NUMERIC')then
+    Result := C_DOUBLE
+  else
   begin
     Application.MessageBox(PChar('Tipo de dado não conhecido: ' + ATypeName + ' (tipo string será utilizado)'), 'Tipo desconhecido', MB_OK + MB_ICONEXCLAMATION);
     Result := C_STRING+ '   {'+ ATypeName +'}';

@@ -3,31 +3,36 @@ unit Model.DM1;
 interface
 
 uses
-  System.Classes,
-  System.SysUtils,
   Data.DB,
+
   FireDAC.Comp.Client,
   FireDAC.Comp.DataSet,
-  FireDAC.Stan.Intf,
-  FireDAC.Stan.Option,
-  FireDAC.Stan.Error,
-  FireDAC.Stan.Def,
-  FireDAC.Stan.Pool,
-  FireDAC.Stan.Async,
-  FireDAC.Stan.Param,
-  FireDAC.Phys.Intf,
-  FireDAC.Phys,
-  FireDAC.Phys.MySQL,
-  FireDAC.Phys.MySQLDef,
-  FireDAC.UI.Intf,
-  FireDAC.VCLUI.Wait,
-  FireDAC.DatS,
-  FireDAC.DApt.Intf,
   FireDAC.DApt,
+  FireDAC.DApt.Intf,
+  FireDAC.DatS,
+  FireDAC.Phys,
+  FireDAC.Phys.FB,
   FireDAC.Phys.FBDef,
   FireDAC.Phys.IBBase,
-  FireDAC.Phys.FB, FireDAC.Stan.ExprFuncs, FireDAC.Phys.SQLiteWrapper.Stat,
-  FireDAC.Phys.SQLiteDef, FireDAC.Phys.SQLite;
+  FireDAC.Phys.Intf,
+  FireDAC.Phys.MySQL,
+  FireDAC.Phys.MySQLDef,
+  FireDAC.Phys.SQLite,
+  FireDAC.Phys.SQLiteDef,
+  FireDAC.Phys.SQLiteWrapper.Stat,
+  FireDAC.Stan.Async,
+  FireDAC.Stan.Def,
+  FireDAC.Stan.Error,
+  FireDAC.Stan.ExprFuncs,
+  FireDAC.Stan.Intf,
+  FireDAC.Stan.Option,
+  FireDAC.Stan.Param,
+  FireDAC.Stan.Pool,
+  FireDAC.UI.Intf,
+  FireDAC.VCLUI.Wait,
+
+  System.Classes,
+  System.SysUtils;
 
 type
   TDM = class(TDataModule)

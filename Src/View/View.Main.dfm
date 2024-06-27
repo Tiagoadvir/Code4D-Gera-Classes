@@ -10,13 +10,11 @@ object ViewMain: TViewMain
   Font.Height = -11
   Font.Name = 'Tahoma'
   Font.Style = []
-  OldCreateOrder = False
   Position = poScreenCenter
   WindowState = wsMaximized
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   OnShow = FormShow
-  PixelsPerInch = 96
   TextHeight = 13
   object pnRodape: TPanel
     Left = 0
@@ -29,6 +27,8 @@ object ViewMain: TViewMain
     Padding.Left = 3
     ParentBackground = False
     TabOrder = 0
+    ExplicitTop = 619
+    ExplicitWidth = 1031
     object imgLogo: TImage
       Left = 3
       Top = 0
@@ -249,7 +249,6 @@ object ViewMain: TViewMain
       ParentFont = False
       Layout = tlCenter
       OnClick = imgLogoClick
-      ExplicitLeft = 83
       ExplicitWidth = 255
       ExplicitHeight = 33
     end
@@ -262,6 +261,8 @@ object ViewMain: TViewMain
     ActivePage = tabConexao
     Align = alClient
     TabOrder = 1
+    ExplicitWidth = 1031
+    ExplicitHeight = 619
     object tabConexao: TTabSheet
       Caption = 'Conex'#227'o'
       object pnConexao: TPanel
@@ -272,6 +273,8 @@ object ViewMain: TViewMain
         Align = alClient
         BevelOuter = bvNone
         TabOrder = 0
+        ExplicitWidth = 1023
+        ExplicitHeight = 591
         object Label2: TLabel
           Left = 24
           Top = 5
@@ -359,13 +362,12 @@ object ViewMain: TViewMain
           Width = 650
           Height = 21
           Style = csDropDownList
-          ItemIndex = 0
           TabOrder = 0
-          Text = 'MySQL'
           OnChange = cBoxDriverChange
           Items.Strings = (
             'MySQL'
-            'Firebird')
+            'Firebird'
+            'SQLite')
         end
         object edtDatabase: TEdit
           Left = 24
@@ -466,6 +468,16 @@ object ViewMain: TViewMain
           Cursor = crHandPoint
           Caption = 'Salvar senha para pr'#243'ximos acessos'
           TabOrder = 11
+        end
+        object btnPreencherComDadosSQLite: TButton
+          Left = 693
+          Top = 80
+          Width = 218
+          Height = 25
+          Cursor = crHandPoint
+          Caption = 'Preencher com dados b'#225'sicos do SQLite'
+          TabOrder = 12
+          OnClick = btnPreencherComDadosSQLiteClick
         end
       end
     end

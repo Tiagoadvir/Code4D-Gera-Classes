@@ -26,7 +26,8 @@ uses
   FireDAC.DApt,
   FireDAC.Phys.FBDef,
   FireDAC.Phys.IBBase,
-  FireDAC.Phys.FB;
+  FireDAC.Phys.FB, FireDAC.Stan.ExprFuncs, FireDAC.Phys.SQLiteWrapper.Stat,
+  FireDAC.Phys.SQLiteDef, FireDAC.Phys.SQLite;
 
 type
   TDM = class(TDataModule)
@@ -57,6 +58,7 @@ type
     FDMetaInfoQueryFIeldsCOLUMN_SCALE: TIntegerField;
     FDMetaInfoQueryFIeldsCOLUMN_LENGTH: TIntegerField;
     FDPhysFBDriverLink1: TFDPhysFBDriverLink;
+    FDPhysSQLiteDriverLink1: TFDPhysSQLiteDriverLink;
     procedure DataModuleCreate(Sender: TObject);
   private
 

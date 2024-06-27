@@ -99,6 +99,7 @@ type
     edtLocalizarNomeTabela: TEdit;
     Label10: TLabel;
     btnVerSenha: TSpeedButton;
+    btnPreencherComDadosSQLite: TButton;
     procedure btnConectarOnOFFClick(Sender: TObject);
     procedure btnListarTabelasDoBancoClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -124,6 +125,7 @@ type
     procedure edtLocalizarNomeTabelaKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure btnVerSenhaMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
     procedure btnVerSenhaMouseUp(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+    procedure btnPreencherComDadosSQLiteClick(Sender: TObject);
   private
     FStrGeral: TStrings;
     FStrMetodosPrivate: TStrings;
@@ -299,6 +301,9 @@ begin
   edtUsuario.Text := 'root';
   edtHost.Text := 'localhost';
   edtPorta.Text := '3306';
+  edtUsuario.Enabled := True;
+  edtSenha.Enabled := True;
+  edtPorta.Enabled := True;
   Self.ConfSGBD;
 end;
 
@@ -310,7 +315,24 @@ begin
   edtUsuario.Text := 'sysdba';
   edtSenha.Text := 'masterkey';
   edtHost.Text := 'localhost';
+  edtUsuario.Enabled := True;
+  edtSenha.Enabled := True;
+  edtPorta.Enabled := True;
   edtPorta.Text := '';
+  Self.ConfSGBD;
+end;
+
+procedure TViewMain.btnPreencherComDadosSQLiteClick(Sender: TObject);
+begin
+  if(dm.FDConnection1.Connected)then
+    btnConectarOnOFF.Click;
+  cBoxDriver.ItemIndex := 2;
+  edtUsuario.Text := '';
+  edtPorta.Text := '';
+  edtSenha.Text := '';
+  edtUsuario.Enabled := False;
+  edtSenha.Enabled := False;
+  edtPorta.Enabled := False;
   Self.ConfSGBD;
 end;
 
@@ -339,6 +361,7 @@ begin
     case(cBoxDriver.ItemIndex)of
       0: dm.FDConnection1.Params.DriverID := 'MySQL';
       1: dm.FDConnection1.Params.DriverID := 'FB';
+      2: dm.FDConnection1.Params.DriverID := 'SQLite';
     end;
     dm.FDConnection1.Params.Database := edtDatabase.Text;
     dm.FDConnection1.Params.UserName := edtUsuario.Text;
@@ -496,7 +519,7 @@ begin
   try
     LOpenDialog.Title := 'Selecione o arquivo desejado';
     LOpenDialog.DefaulText := '*.FDB';
-    LOpenDialog.Filter := 'Arquivos FDB (*.FDB)|*.FDB|Arquivos GDB (*.GDB)|*.GDB|Todos os Arquivos (*.*)|*.*';
+    LOpenDialog.Filter := 'Arquivos FDB (*.FDB)|*.FDB|Arquivos GDB (*.GDB)|*.GDB|Arquivos DB (*.DB)|*.DB|Todos os Arquivos (*.*)|*.*';
     LOpenDialog.InitialDir := ExtractFileDir(LOpenDialog.FileName);
     if(not LOpenDialog.Execute)then
       Exit;
@@ -559,7 +582,10 @@ end;
 
 procedure TViewMain.ConfSGBD;
 begin
-  btnBuscarArquivoBanco.Enabled := cBoxDriver.ItemIndex = 1;
+ case cBoxDriver.ItemIndex of
+  1:  btnBuscarArquivoBanco.Enabled := True;
+  2:  btnBuscarArquivoBanco.Enabled := True;
+ end;
 end;
 
 procedure TViewMain.btnGerarClassEntitiesSelecionadosClick(Sender: TObject);

@@ -147,6 +147,7 @@ class function TUtils.GerarCabecalhoArquivo: string;
 begin
   Result := '{'+ StringOfChar('*', 78) + '}' + sLineBreak +
     '{'+ CompD('Code4D - Gerador de classes: ' + FormatDateTime('dd/mm/yyyy hh:nn:ss', Now), 78) +'}' + sLineBreak +
+    '{'+ CompD('Contribuição - Tiago Robson - Delphiando - @Tiagoadvir ' +  '', 78) +'}' + sLineBreak +
     '{'+ StringOfChar('*', 78) + '}' + sLineBreak;
 
   {Result := '//'+ StringOfChar('*', 78)                                                    + sLineBreak +

@@ -32,7 +32,7 @@ uses
   FireDAC.VCLUI.Wait,
 
   System.Classes,
-  System.SysUtils;
+  System.SysUtils, FireDAC.Phys.PGDef, FireDAC.Phys.PG;
 
 type
   TDM = class(TDataModule)
@@ -64,6 +64,7 @@ type
     FDMetaInfoQueryFIeldsCOLUMN_LENGTH: TIntegerField;
     FDPhysFBDriverLink1: TFDPhysFBDriverLink;
     FDPhysSQLiteDriverLink1: TFDPhysSQLiteDriverLink;
+    FDPhysPgDriverLink1: TFDPhysPgDriverLink;
     procedure DataModuleCreate(Sender: TObject);
   private
 
@@ -82,6 +83,7 @@ implementation
 
 procedure TDM.DataModuleCreate(Sender: TObject);
 begin
+  FDPhysPgDriverLink1.VendorHome := '.\';
   FDConnection1.Connected := False;
 end;
 

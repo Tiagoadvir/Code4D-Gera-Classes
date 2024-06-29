@@ -100,6 +100,7 @@ type
     Label10: TLabel;
     btnVerSenha: TSpeedButton;
     btnPreencherComDadosSQLite: TButton;
+    btnPreencherComDadosPostgres: TButton;
     procedure btnConectarOnOFFClick(Sender: TObject);
     procedure btnListarTabelasDoBancoClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -126,6 +127,7 @@ type
     procedure btnVerSenhaMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
     procedure btnVerSenhaMouseUp(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
     procedure btnPreencherComDadosSQLiteClick(Sender: TObject);
+    procedure btnPreencherComDadosPostgresClick(Sender: TObject);
   private
     FStrGeral: TStrings;
     FStrMetodosPrivate: TStrings;
@@ -307,6 +309,21 @@ begin
   Self.ConfSGBD;
 end;
 
+procedure TViewMain.btnPreencherComDadosPostgresClick(Sender: TObject);
+begin
+   if(dm.FDConnection1.Connected)then
+    btnConectarOnOFF.Click;
+  cBoxDriver.ItemIndex := 3;
+  edtUsuario.Text := 'postgres';
+  edtSenha.Text := 'postgres';
+  edtHost.Text := 'localhost';
+  edtUsuario.Enabled := True;
+  edtSenha.Enabled := True;
+  edtPorta.Enabled := True;
+  edtPorta.Text := '5432';
+  Self.ConfSGBD;
+end;
+
 procedure TViewMain.btnPreencherComDadosFirebirdClick(Sender: TObject);
 begin
   if(dm.FDConnection1.Connected)then
@@ -338,19 +355,28 @@ end;
 
 procedure TViewMain.btnConectarOnOFFClick(Sender: TObject);
 begin
-  if(not dm.FDConnection1.Connected)then
-  begin
-    Self.ConectarBanco;
-    dm.FDMemTableTabelas.Open;
-    tabGerador.Show;
-  end
-  else
-  begin
-    dm.FDMemTableTabelas.Close;
-    dm.FDConnection1.Connected := False;
-  end;
-  btnConectarOnOFF.Caption := IfThen(dm.FDConnection1.Connected, 'Desconectar', 'Conectar');
-  pnGerador.Enabled := dm.FDConnection1.Connected;
+   try
+      if(not dm.FDConnection1.Connected)then
+      begin
+        Self.ConectarBanco;
+        dm.FDMemTableTabelas.Open;
+        tabGerador.Show;
+      end
+      else
+      begin
+        dm.FDMemTableTabelas.Close;
+        dm.FDConnection1.Connected := False;
+      end;
+      btnConectarOnOFF.Caption := IfThen(dm.FDConnection1.Connected, 'Desconectar', 'Conectar');
+      pnGerador.Enabled := dm.FDConnection1.Connected;
+   Except  on ex:exception do
+      begin
+        if  AnsiContainsstr(ex.Message, 'password authentication failed') then
+        begin
+           showMessage('Erro de Autenticação para o usuário ' + edtUsuario.Text);
+        end;
+      end;
+   end;
 end;
 
 procedure TViewMain.ConectarBanco;
@@ -362,6 +388,7 @@ begin
       0: dm.FDConnection1.Params.DriverID := 'MySQL';
       1: dm.FDConnection1.Params.DriverID := 'FB';
       2: dm.FDConnection1.Params.DriverID := 'SQLite';
+      3: dm.FDConnection1.Params.DriverID := 'PG';
     end;
     dm.FDConnection1.Params.Database := edtDatabase.Text;
     dm.FDConnection1.Params.UserName := edtUsuario.Text;

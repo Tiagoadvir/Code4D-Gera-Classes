@@ -367,7 +367,8 @@ object ViewMain: TViewMain
           Items.Strings = (
             'MySQL'
             'Firebird'
-            'SQLite')
+            'SQLite'
+            'Postgres')
         end
         object edtDatabase: TEdit
           Left = 24
@@ -478,6 +479,16 @@ object ViewMain: TViewMain
           Caption = 'Preencher com dados b'#225'sicos do SQLite'
           TabOrder = 12
           OnClick = btnPreencherComDadosSQLiteClick
+        end
+        object btnPreencherComDadosPostgres: TButton
+          Left = 693
+          Top = 111
+          Width = 218
+          Height = 25
+          Cursor = crHandPoint
+          Caption = 'Preencher com dados b'#225'sicos do Postgres'
+          TabOrder = 13
+          OnClick = btnPreencherComDadosPostgresClick
         end
       end
     end

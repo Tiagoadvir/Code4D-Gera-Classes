@@ -74,7 +74,7 @@ object DM: TDM
   object DS_FDMemTableTabelas: TDataSource
     DataSet = FDMemTableTabelas
     Left = 464
-    Top = 160
+    Top = 216
   end
   object FDMetaInfoQueryFIelds: TFDMetaInfoQuery
     Connection = FDConnection1
@@ -143,5 +143,9 @@ object DM: TDM
   object FDPhysSQLiteDriverLink1: TFDPhysSQLiteDriverLink
     Left = 464
     Top = 88
+  end
+  object FDPhysPgDriverLink1: TFDPhysPgDriverLink
+    Left = 464
+    Top = 152
   end
 end

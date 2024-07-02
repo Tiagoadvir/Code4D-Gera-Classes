@@ -258,7 +258,7 @@ object ViewMain: TViewMain
     Top = 0
     Width = 1035
     Height = 620
-    ActivePage = tabConexao
+    ActivePage = tabGerador
     Align = alClient
     TabOrder = 1
     ExplicitWidth = 1031
@@ -273,8 +273,6 @@ object ViewMain: TViewMain
         Align = alClient
         BevelOuter = bvNone
         TabOrder = 0
-        ExplicitWidth = 1023
-        ExplicitHeight = 591
         object Label2: TLabel
           Left = 24
           Top = 5
@@ -504,6 +502,8 @@ object ViewMain: TViewMain
         BevelOuter = bvNone
         ParentBackground = False
         TabOrder = 0
+        ExplicitWidth = 1023
+        ExplicitHeight = 591
         object Splitter1: TSplitter
           Left = 297
           Top = 0
@@ -521,6 +521,7 @@ object ViewMain: TViewMain
           BevelOuter = bvNone
           ParentBackground = False
           TabOrder = 0
+          ExplicitHeight = 591
           object Panel6: TPanel
             AlignWithMargins = True
             Left = 0
@@ -679,6 +680,8 @@ object ViewMain: TViewMain
           BevelOuter = bvNone
           ParentBackground = False
           TabOrder = 1
+          ExplicitWidth = 723
+          ExplicitHeight = 591
           object mmLog: TMemo
             Left = 0
             Top = 297
@@ -693,6 +696,8 @@ object ViewMain: TViewMain
             ParentFont = False
             ScrollBars = ssVertical
             TabOrder = 0
+            ExplicitWidth = 723
+            ExplicitHeight = 261
           end
           object Panel7: TPanel
             Left = 0
@@ -707,6 +712,7 @@ object ViewMain: TViewMain
             BevelOuter = bvNone
             ParentBackground = False
             TabOrder = 1
+            ExplicitWidth = 723
             object Panel1: TPanel
               Left = 0
               Top = 0
@@ -714,6 +720,7 @@ object ViewMain: TViewMain
               Height = 59
               Align = alTop
               TabOrder = 0
+              ExplicitWidth = 723
               object Label8: TLabel
                 Left = 7
                 Top = 0
@@ -748,14 +755,14 @@ object ViewMain: TViewMain
               object ckGravarArquivosPasta: TCheckBox
                 Left = 7
                 Top = 38
-                Width = 139
+                Width = 149
                 Height = 17
                 Cursor = crHandPoint
                 Caption = 'Gravar arquivos na pasta'
                 TabOrder = 2
               end
               object ckAbrirPastaAposGravar: TCheckBox
-                Left = 154
+                Left = 162
                 Top = 38
                 Width = 147
                 Height = 17
@@ -810,7 +817,8 @@ object ViewMain: TViewMain
                   'Property acesso direto'
                   'Property acesso Get e Set'
                   'Func'#245'es com prefixo Get e Set'
-                  'Fun'#231#245'es fluent interface (overload)')
+                  'Fun'#231#245'es fluent interface (overload)'
+                  'Orientado a Interfaces')
                 TabOrder = 1
               end
             end
@@ -1052,6 +1060,8 @@ object ViewMain: TViewMain
             Padding.Bottom = 3
             ParentBackground = False
             TabOrder = 2
+            ExplicitTop = 558
+            ExplicitWidth = 723
             object btnLogLimpar: TButton
               Left = 3
               Top = 3

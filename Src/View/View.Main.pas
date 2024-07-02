@@ -926,7 +926,8 @@ end;
 
 procedure TViewMain.ProcessarContratoInterface(AFieldNameLB: string; AFieldTipo: string);
 begin
-  FStrAcessoDeclaracoes.Add('    function '+ AFieldNameLB +'(Value: '+ AFieldTipo +'): i' + FUnitNome + ';');
+  FStrAcessoDeclaracoes.Add('    function '+ AFieldNameLB + ':' + AFieldTipo + '; overload;');
+  FStrAcessoDeclaracoes.Add('    function '+ AFieldNameLB +'(Value: '+ AFieldTipo +'): i' + FUnitNome  +'; overload;');
 end;
 
 procedure TViewMain.ProcessaFluentInterface(AFieldNameLB: string; AFieldTipo: string);
@@ -949,9 +950,14 @@ end;
 
 procedure TViewMain.ProcessaOrientacaoInterface(AFieldNameLB: string; AFieldTipo: string);
 begin
+  FStrAcessoDeclaracoes.Add('    function '+ AFieldNameLB +': '+ AFieldTipo +'; overload;');
+  FStrAcessoDeclaracoes.Add('    function '+ AFieldNameLB +'(Value: '+ AFieldTipo +'): i' + FUnitNome +'; overload;');
 
-  FStrAcessoDeclaracoes.Add('    function '+ AFieldNameLB +'(Value: '+ AFieldTipo +'): i' + FUnitNome +';');
-
+  FStrAcessoImpl.Add('function '+ FClasseNome + '.' + AFieldNameLB +': '+ AFieldTipo +';');
+  FStrAcessoImpl.Add('begin');
+  FStrAcessoImpl.Add('   Result := F'+ AFieldNameLB +';');
+  FStrAcessoImpl.Add('end;');
+  FStrAcessoImpl.Add('');
   FStrAcessoImpl.Add('function '+ FClasseNome +'.'+ AFieldNameLB +'(Value: '+ AFieldTipo +'): i'+ FUnitNome +';');
   FStrAcessoImpl.Add('begin');
   FStrAcessoImpl.Add('   Result := Self;');

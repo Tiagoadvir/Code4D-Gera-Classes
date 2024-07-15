@@ -101,6 +101,7 @@ type
     btnVerSenha: TSpeedButton;
     btnPreencherComDadosSQLite: TButton;
     btnPreencherComDadosPostgres: TButton;
+    ckGerarsaídadedadosinterface: TCheckBox;
     procedure btnConectarOnOFFClick(Sender: TObject);
     procedure btnListarTabelasDoBancoClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -128,6 +129,7 @@ type
     procedure btnVerSenhaMouseUp(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
     procedure btnPreencherComDadosSQLiteClick(Sender: TObject);
     procedure btnPreencherComDadosPostgresClick(Sender: TObject);
+    procedure rdGroupFormaAcessoEntitiesClick(Sender: TObject);
   private
     FStrGeral: TStrings;
     FStrMetodosPrivate: TStrings;
@@ -592,6 +594,11 @@ begin
   end;
 end;
 
+procedure TViewMain.rdGroupFormaAcessoEntitiesClick(Sender: TObject);
+begin
+  ckGerarsaídadedadosinterface.Visible := rdGroupFormaAcessoEntities.ItemIndex = 4;
+end;
+
 procedure TViewMain.rdGroupORMClick(Sender: TObject);
 begin
   if(rdGroupORM.ItemIndex = 1)then
@@ -926,8 +933,15 @@ end;
 
 procedure TViewMain.ProcessarContratoInterface(AFieldNameLB: string; AFieldTipo: string);
 begin
-  FStrAcessoDeclaracoes.Add('    function '+ AFieldNameLB + ':' + AFieldTipo + '; overload;');
-  FStrAcessoDeclaracoes.Add('    function '+ AFieldNameLB +'(Value: '+ AFieldTipo +'): i' + FUnitNome  +'; overload;');
+  if ckGerarsaídadedadosinterface.Checked then
+  begin
+    FStrAcessoDeclaracoes.Add('    function '+ AFieldNameLB + ':' + AFieldTipo + '; overload;');
+    FStrAcessoDeclaracoes.Add('    function '+ AFieldNameLB +'(Value: '+ AFieldTipo +'): i' + FUnitNome  +'; overload;');
+  end
+  else
+  begin
+    FStrAcessoDeclaracoes.Add('    function '+ AFieldNameLB +'(Value: '+ AFieldTipo +'): i' + FUnitNome  +';');
+  end;
 end;
 
 procedure TViewMain.ProcessaFluentInterface(AFieldNameLB: string; AFieldTipo: string);
@@ -950,20 +964,34 @@ end;
 
 procedure TViewMain.ProcessaOrientacaoInterface(AFieldNameLB: string; AFieldTipo: string);
 begin
-  FStrAcessoDeclaracoes.Add('    function '+ AFieldNameLB +': '+ AFieldTipo +'; overload;');
-  FStrAcessoDeclaracoes.Add('    function '+ AFieldNameLB +'(Value: '+ AFieldTipo +'): i' + FUnitNome +'; overload;');
+  if ckGerarsaídadedadosinterface.Checked then
+  begin
+    FStrAcessoDeclaracoes.Add('    function '+ AFieldNameLB +': '+ AFieldTipo +'; overload;');
+    FStrAcessoDeclaracoes.Add('    function '+ AFieldNameLB +'(Value: '+ AFieldTipo +'): i' + FUnitNome +'; overload;');
 
-  FStrAcessoImpl.Add('function '+ FClasseNome + '.' + AFieldNameLB +': '+ AFieldTipo +';');
-  FStrAcessoImpl.Add('begin');
-  FStrAcessoImpl.Add('   Result := F'+ AFieldNameLB +';');
-  FStrAcessoImpl.Add('end;');
-  FStrAcessoImpl.Add('');
-  FStrAcessoImpl.Add('function '+ FClasseNome +'.'+ AFieldNameLB +'(Value: '+ AFieldTipo +'): i'+ FUnitNome +';');
-  FStrAcessoImpl.Add('begin');
-  FStrAcessoImpl.Add('   Result := Self;');
-  FStrAcessoImpl.Add('   F'+ AFieldNameLB +' := Value;');
-  FStrAcessoImpl.Add('end;');
-  FStrAcessoImpl.Add('');
+    FStrAcessoImpl.Add('function '+ FClasseNome + '.' + AFieldNameLB +': '+ AFieldTipo +';');
+    FStrAcessoImpl.Add('begin');
+    FStrAcessoImpl.Add('   Result := F'+ AFieldNameLB +';');
+    FStrAcessoImpl.Add('end;');
+    FStrAcessoImpl.Add('');
+    FStrAcessoImpl.Add('function '+ FClasseNome +'.'+ AFieldNameLB +'(Value: '+ AFieldTipo +'): i'+ FUnitNome +';');
+    FStrAcessoImpl.Add('begin');
+    FStrAcessoImpl.Add('   Result := Self;');
+    FStrAcessoImpl.Add('   F'+ AFieldNameLB +' := Value;');
+    FStrAcessoImpl.Add('end;');
+    FStrAcessoImpl.Add('');
+  end
+  else
+  begin
+    FStrAcessoDeclaracoes.Add('    function '+ AFieldNameLB +'(Value: '+ AFieldTipo +'): i' + FUnitNome +';');
+
+    FStrAcessoImpl.Add('function '+ FClasseNome +'.'+ AFieldNameLB +'(Value: '+ AFieldTipo +'): i'+ FUnitNome +';');
+    FStrAcessoImpl.Add('begin');
+    FStrAcessoImpl.Add('   Result := Self;');
+    FStrAcessoImpl.Add('   F'+ AFieldNameLB +' := Value;');
+    FStrAcessoImpl.Add('end;');
+    FStrAcessoImpl.Add('');
+  end;
 end;
 
 procedure TViewMain.GeraPrivate;

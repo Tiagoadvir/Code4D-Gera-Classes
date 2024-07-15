@@ -1,4 +1,4 @@
-object ViewMain: TViewMain
+﻿object ViewMain: TViewMain
   Left = 0
   Top = 0
   Caption = 'Code4D - Gerador de classes'
@@ -820,6 +820,7 @@ object ViewMain: TViewMain
                   'Fun'#231#245'es fluent interface (overload)'
                   'Orientado a Interfaces')
                 TabOrder = 1
+                OnClick = rdGroupFormaAcessoEntitiesClick
               end
             end
             object GroupBox2: TGroupBox
@@ -923,6 +924,21 @@ object ViewMain: TViewMain
                 Checked = True
                 State = cbChecked
                 TabOrder = 6
+              end
+              object ckGerarsaídadedadosinterface: TCheckBox
+                AlignWithMargins = True
+                Left = 5
+                Top = 155
+                Width = 234
+                Height = 17
+                Cursor = crHandPoint
+                Margins.Top = 0
+                Align = alTop
+                Caption = 'Gerar sa'#237'da de dados interface'
+                TabOrder = 7
+                Visible = False
+                ExplicitLeft = 3
+                ExplicitTop = 167
               end
             end
             object Panel2: TPanel
